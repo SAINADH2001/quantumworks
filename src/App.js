@@ -63,7 +63,7 @@ function App() {
         >
           <Header />
           <main>
-            <Hero />
+            <Hero id="home" />
             <About id="about" />
             <Services id="services" />
             <Projects id="projects" />

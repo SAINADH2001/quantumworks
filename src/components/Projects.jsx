@@ -87,18 +87,20 @@ const ProjectCard = ({ project }) => {
           ))}
         </div>
         <p className="text-gray-400 mb-4">{project.description}</p>
-        <button className="text-red-500 font-medium flex items-center gap-1 group">
-          View Project
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-4 w-4 transform transition-transform group-hover:translate-x-1" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </button>
+        {project.link && (
+          <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-red-500 font-medium flex items-center gap-1 group">
+            View Project
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-4 w-4 transform transition-transform group-hover:translate-x-1" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        )}
       </div>
     </motion.div>
   );
@@ -112,7 +114,9 @@ const Projects = () => {
       title: "Artha AI Assistant",
       tech: ["React", "Node.js", "AI/ML", "NLP"],
       description: "Intelligent AI assistant with natural language processing capabilities",
-      image: "https://miro.medium.com/v2/resize:fit:700/1*Rcm3lsWEgZ7UJ6WsKlhSiA.jpeg"},
+      image: "https://miro.medium.com/v2/resize:fit:700/1*Rcm3lsWEgZ7UJ6WsKlhSiA.jpeg",
+      link: "https://github.com/gurram46/Artha-Agent/tree/main"
+    },
     {
       id: 2,
       title: "E-commerce Platform",

@@ -2,6 +2,9 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FaLaptopCode, FaMobileAlt } from "react-icons/fa";
+import { BiBrain, BiBot } from "react-icons/bi";
+import { MdOutlineAnalytics } from "react-icons/md";
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -25,78 +28,86 @@ const Services = () => {
       id: 1,
       title: "Web Development",
       description: "Custom websites & web applications built with modern technologies to deliver exceptional user experiences.",
-      icon: "square"
+      icon: "web"
     },
     {
       id: 2,
       title: "Mobile Apps",
       description: "Native and cross-platform mobile applications for iOS and Android that engage users and drive results.",
-      icon: "circle"
+      icon: "mobile"
     },
     {
       id: 3,
-      title: "UI/UX Design",
-      description: "User-centered design solutions that combine aesthetics with functionality to create intuitive interfaces.",
-      icon: "triangle"
+      title: "Generative AI",
+      description: "Advanced AI solutions that create content, images, and text using state-of-the-art machine learning models.",
+      icon: "genai"
     },
     {
       id: 4,
-      title: "Brand Identity",
-      description: "Comprehensive logo and brand design services that establish a strong, memorable presence in the market.",
-      icon: "hexagon"
+      title: "Agentic AI",
+      description: "Intelligent AI agents that can perform tasks, make decisions, and solve complex problems autonomously.",
+      icon: "agent"
     },
     {
       id: 5,
       title: "Digital Marketing",
       description: "Strategic SEO and social media campaigns that increase visibility and drive targeted traffic to your business.",
-      icon: "diamond"
-    },
-    {
-      id: 6,
-      title: "Consulting",
-      description: "Expert technical strategy and advice to help businesses navigate the complex digital landscape effectively.",
-      icon: "pentagon"
+      icon: "marketing"
     }
   ];
   
-  // Render geometric icon based on shape name
+  // Render icon based on service type with animated icons
   const renderIcon = (shape) => {
     switch(shape) {
-      case 'square':
+      case 'web':
         return (
-          <div className="w-16 h-16 relative">
-            <div className="absolute inset-0 bg-red-600 rounded-sm transform transition-transform duration-300 group-hover:rotate-45"></div>
-          </div>
+          <motion.div 
+            className="w-20 h-20 flex items-center justify-center text-red-500"
+            whileHover={{ scale: 1.2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <FaLaptopCode className="w-16 h-16" />
+          </motion.div>
         );
-      case 'circle':
+      case 'mobile':
         return (
-          <div className="w-16 h-16 relative">
-            <div className="absolute inset-0 bg-red-600 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
-          </div>
+          <motion.div 
+            className="w-20 h-20 flex items-center justify-center text-red-500"
+            whileHover={{ scale: 1.2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <FaMobileAlt className="w-16 h-16" />
+          </motion.div>
         );
-      case 'triangle':
+      case 'genai':
         return (
-          <div className="w-16 h-16 relative flex items-center justify-center">
-            <div className="w-0 h-0 border-l-[32px] border-r-[32px] border-b-[56px] border-l-transparent border-r-transparent border-b-red-600 transform transition-transform duration-300 group-hover:rotate-180"></div>
-          </div>
+          <motion.div 
+            className="w-20 h-20 flex items-center justify-center text-red-500"
+            whileHover={{ scale: 1.2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <BiBrain className="w-16 h-16" />
+          </motion.div>
         );
-      case 'hexagon':
+      case 'agent':
         return (
-          <div className="w-16 h-16 relative flex items-center justify-center">
-            <div className="w-14 h-14 bg-red-600 transform transition-transform duration-300 group-hover:rotate-90" style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}></div>
-          </div>
+          <motion.div 
+            className="w-20 h-20 flex items-center justify-center text-red-500"
+            whileHover={{ scale: 1.2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <BiBot className="w-16 h-16" />
+          </motion.div>
         );
-      case 'diamond':
+      case 'marketing':
         return (
-          <div className="w-16 h-16 relative flex items-center justify-center">
-            <div className="w-12 h-12 bg-red-600 transform rotate-45 transition-transform duration-300 group-hover:rotate-[225deg]"></div>
-          </div>
-        );
-      case 'pentagon':
-        return (
-          <div className="w-16 h-16 relative flex items-center justify-center">
-            <div className="w-14 h-14 bg-red-600 transform transition-transform duration-300 group-hover:rotate-180" style={{ clipPath: 'polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)' }}></div>
-          </div>
+          <motion.div 
+            className="w-20 h-20 flex items-center justify-center text-red-500"
+            whileHover={{ scale: 1.2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <MdOutlineAnalytics className="w-16 h-16" />
+          </motion.div>
         );
       default:
         return (
@@ -228,19 +239,7 @@ const Services = () => {
                 {service.description}
               </motion.p>
               
-              {/* Learn More Link */}
-              <motion.div 
-                className="flex items-center text-red-500 font-medium"
-                variants={textVariants}
-              >
-                <span>Learn More</span>
-                <motion.span 
-                  className="ml-2"
-                  variants={arrowVariants}
-                >
-                  →
-                </motion.span>
-              </motion.div>
+              {/* Learn More Link removed */}
             </motion.div>
           ))}
         </div>

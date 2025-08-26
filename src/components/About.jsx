@@ -49,9 +49,9 @@ const About = () => {
   
   // Stats data
   const stats = [
-    { label: "Projects", value: 100, symbol: "+" },
-    { label: "Clients", value: 50, symbol: "+" },
-    { label: "Years", value: 5, symbol: "+" }
+    { label: "Projects", value: 10, symbol: "+" },
+    { label: "Clients", value: 10, symbol: "+" },
+    { label: "Years", value: 1, symbol: "+" }
   ];
   
   // ScrollTrigger for section reveal
@@ -188,12 +188,12 @@ const About = () => {
           ))}
         </div>
         
-        {/* Stats and Image Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Stats Section - Centered */}
+        <div className="flex justify-center items-center my-16 w-full">
           {/* Stats */}
           <div 
             ref={statsRef}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto"
           >
             {stats.map((stat, index) => (
               <motion.div 
@@ -211,20 +211,6 @@ const About = () => {
               </motion.div>
             ))}
           </div>
-          
-          {/* Team Image */}
-          <motion.div 
-            ref={imageRef}
-            className="relative overflow-hidden rounded-lg h-80 lg:h-96"
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Placeholder image with red overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-red-600/80 to-red-900/50 z-10"></div>
-            <div className="absolute inset-0 bg-gray-800 flex items-center justify-center z-0">
-              <p className="text-2xl font-bold text-gray-600">Team Image</p>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>

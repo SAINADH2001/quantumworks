@@ -199,6 +199,7 @@ const Header = () => {
               boxShadow: `0 10px 15px -3px rgba(${parseInt(themeColors.red.slice(1, 3), 16)}, ${parseInt(themeColors.red.slice(3, 5), 16)}, ${parseInt(themeColors.red.slice(5, 7), 16)}, 0.3)`
             }}
             transition={{ duration: 0.2 }}
+            onClick={() => window.location.href = '#contact'}
           >
             Get Started
           </motion.button>
@@ -300,6 +301,7 @@ const Header = () => {
                 transition={{ duration: 0.2 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
+                onClick={() => window.location.href = '#contact'}
               >
                 Get Started
               </motion.button>

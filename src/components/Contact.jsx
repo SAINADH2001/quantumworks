@@ -478,39 +478,10 @@ const Contact = () => {
                 </div>
               </div>
               
-              {/* Address */}
-              <div className="info-item flex items-start">
-                <div className="bg-red-600 rounded-full p-2 mr-4">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-gray-400 text-sm">Address</p>
-                  <p className="text-white">Madhapur, Hyderabad</p>
-                </div>
-              </div>
+              {/* Address removed */}
             </div>
             
-            {/* Social Links */}
-            <div className="mt-10">
-              <h4 className="text-lg font-medium mb-4 text-white">Connect With Us</h4>
-              <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
-                  <motion.a
-                    key={index}
-                    href={social.url}
-                    className="bg-gray-800 hover:bg-red-600 text-white p-3 rounded-full transition-colors duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    aria-label={social.name}
-                  >
-                    {renderSocialIcon(social.icon)}
-                  </motion.a>
-                ))}
-              </div>
-            </div>
+            {/* Social Links removed */}
           </div>
         </div>
       </div>
