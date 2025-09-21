@@ -50,9 +50,9 @@ const Contact = () => {
   // Project type options
   const projectTypes = [
     'Web Development',
-    'Mobile App',
-    'UI/UX Design',
-    'Brand Identity',
+    'Mobile Apps',
+    'Generative AI',
+    'Agentic AI',
     'Digital Marketing',
     'Consulting'
   ];
@@ -461,7 +461,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Email</p>
-                  <a href="mailto:repaircom18@gmail.com" className="text-white hover:text-red-500 transition-colors duration-300">repaircom18@gmail.com</a>
+                  <a href="mailto:contact@quantumworks.services" className="text-white hover:text-red-500 transition-colors duration-300">contact@quantumworks.services</a>
                 </div>
               </div>
               
