@@ -111,25 +111,48 @@ const Contact = () => {
   };
   
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+      e.preventDefault(); // Prevent default to handle submission manually
+
       // Validate form
       const isValid = validateForm();
 
       if (isValid) {
         setIsSubmitting(true);
 
-        // Reset form after successful submission
-        setTimeout(() => {
-          setFormState({
-            name: '',
-            email: '',
-            projectType: '',
-            message: ''
+        try {
+          // Submit form data to Netlify using fetch
+          const formData = new FormData(e.target);
+
+          const response = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString()
           });
+
+          if (response.ok) {
+            // Clear form fields after successful submission
+            setFormState({
+              name: '',
+              email: '',
+              projectType: '',
+              message: ''
+            });
+
+            // Show success message
+            setSubmitSuccess(true);
+
+            // Hide success message after 5 seconds
+            setTimeout(() => setSubmitSuccess(false), 5000);
+          } else {
+            throw new Error('Form submission failed');
+          }
+        } catch (error) {
+          console.error('Error submitting form:', error);
+          setErrors({ submit: 'Failed to send message. Please try again.' });
+        } finally {
           setIsSubmitting(false);
-          setSubmitSuccess(true);
-          setTimeout(() => setSubmitSuccess(false), 5000);
-        }, 1000);
+        }
       }
     };
   
@@ -226,7 +249,6 @@ const Contact = () => {
               data-netlify="true"
               name="contact"
               method="POST"
-              action="/thank-you"
               id="contact-form"
             >
               <input type="hidden" name="form-name" value="contact" />
