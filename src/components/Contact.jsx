@@ -111,48 +111,36 @@ const Contact = () => {
   };
   
   // Handle form submission
-  const handleSubmit = async (e) => {
-      e.preventDefault(); // Prevent default to handle submission manually
-
+  const handleSubmit = (e) => {
       // Validate form
       const isValid = validateForm();
 
       if (isValid) {
         setIsSubmitting(true);
 
-        try {
-          // Submit form data to Netlify using fetch
-          const formData = new FormData(e.target);
+        // Let Netlify handle the form submission natively
+        // Netlify will process and send emails to contact@quantumworks.services
 
-          const response = await fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData).toString()
+        // Show success message and clear form after a short delay
+        setTimeout(() => {
+          // Clear form fields after successful submission
+          setFormState({
+            name: '',
+            email: '',
+            projectType: '',
+            message: ''
           });
 
-          if (response.ok) {
-            // Clear form fields after successful submission
-            setFormState({
-              name: '',
-              email: '',
-              projectType: '',
-              message: ''
-            });
-
-            // Show success message
-            setSubmitSuccess(true);
-
-            // Hide success message after 5 seconds
-            setTimeout(() => setSubmitSuccess(false), 5000);
-          } else {
-            throw new Error('Form submission failed');
-          }
-        } catch (error) {
-          console.error('Error submitting form:', error);
-          setErrors({ submit: 'Failed to send message. Please try again.' });
-        } finally {
+          // Show success message
+          setSubmitSuccess(true);
           setIsSubmitting(false);
-        }
+
+          // Hide success message after 5 seconds
+          setTimeout(() => setSubmitSuccess(false), 5000);
+        }, 500); // Small delay to let Netlify process
+      } else {
+        // Prevent form submission if validation fails
+        e.preventDefault();
       }
     };
   
