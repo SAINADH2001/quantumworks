@@ -124,32 +124,16 @@ const Header = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.6, 0.05, -0.01, 0.9] }}
     >
-      <div className="container mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 md:px-6 py-6 flex items-center justify-between min-h-[80px]">
         {/* Logo */}
-        <motion.div 
-          className="flex-shrink-0 relative overflow-hidden group"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <h1 className="text-white text-xl md:text-2xl font-bold">
-            Quantum<motion.span 
-              style={{ color: themeColors.red }} 
-              className="relative inline-block"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              Works
-              <motion.span 
-                className="absolute bottom-0 left-0 h-0.5"
-                style={{ backgroundColor: themeColors.redAlt }}
-                initial={{ width: 0 }}
-                whileHover={{ width: '100%' }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.span>
-          </h1>
-        </motion.div>
+        <div className="flex-shrink-0 relative flex items-center justify-start">
+          {/* Static logo */}
+          <img
+            src="/quantumworks-logo.png"
+            alt="QuantumWorks"
+            className="h-48 w-48 object-contain"
+          />
+        </div>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:block">
