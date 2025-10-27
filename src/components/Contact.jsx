@@ -112,17 +112,26 @@ const Contact = () => {
   
   // Handle form submission
   const handleSubmit = (e) => {
-      // Validate form
-      const isValid = validateForm();
+    e.preventDefault();
+    
+    // Validate form
+    const isValid = validateForm();
 
-      if (isValid) {
-        setIsSubmitting(true);
+    if (isValid) {
+      setIsSubmitting(true);
 
-        // Let Netlify handle the form submission natively
-        // Netlify will process and send emails to contact@quantumworks.services
-
-        // Show success message and clear form after a short delay
-        setTimeout(() => {
+      // Prepare form data for Netlify Forms
+      const formData = new FormData(e.target);
+      
+      // Submit to Netlify
+      fetch("/", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formData).toString()
+      })
+        .then(() => {
           // Clear form fields after successful submission
           setFormState({
             name: '',
@@ -137,12 +146,17 @@ const Contact = () => {
 
           // Hide success message after 5 seconds
           setTimeout(() => setSubmitSuccess(false), 5000);
-        }, 500); // Small delay to let Netlify process
-      } else {
-        // Prevent form submission if validation fails
-        e.preventDefault();
-      }
-    };
+        })
+        .catch(error => {
+          console.error("Form submission error:", error);
+          alert("There was an error sending your message. Please try again.");
+          setIsSubmitting(false);
+        });
+    } else {
+      // Prevent form submission if validation fails
+      e.preventDefault();
+    }
+  };
   
   // ScrollTrigger for section reveal
   useEffect(() => {
