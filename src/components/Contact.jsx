@@ -111,27 +111,33 @@ const Contact = () => {
   };
   
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validate form
     const isValid = validateForm();
 
     if (isValid) {
       setIsSubmitting(true);
 
-      // Prepare form data for Netlify Forms
-      const formData = new FormData(e.target);
-      
-      // Submit to Netlify
-      fetch("/", {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams(formData).toString()
-      })
-        .then(() => {
+      try {
+        // Submit form data to custom Netlify Function
+        const response = await fetch('/.netlify/functions/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formState.name,
+            email: formState.email,
+            projectType: formState.projectType,
+            message: formState.message
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
           // Clear form fields after successful submission
           setFormState({
             name: '',
@@ -146,15 +152,14 @@ const Contact = () => {
 
           // Hide success message after 5 seconds
           setTimeout(() => setSubmitSuccess(false), 5000);
-        })
-        .catch(error => {
-          console.error("Form submission error:", error);
-          alert("There was an error sending your message. Please try again.");
-          setIsSubmitting(false);
-        });
-    } else {
-      // Prevent form submission if validation fails
-      e.preventDefault();
+        } else {
+          throw new Error(result.error || 'Failed to send message');
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        setErrors({ submit: error.message || 'Failed to send message. Please try again.' });
+        setIsSubmitting(false);
+      }
     }
   };
   
@@ -248,12 +253,8 @@ const Contact = () => {
               ref={formRef}
               onSubmit={handleSubmit}
               className="bg-gray-900 rounded-lg p-8 shadow-xl"
-              data-netlify="true"
-              name="contact"
-              method="POST"
               id="contact-form"
             >
-              <input type="hidden" name="form-name" value="contact" />
 
               {/* Name Field */}
               <div className="form-field mb-6 relative">
